@@ -1,0 +1,22 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+  New token
+{% endblock %}
+
+{% block h1 %}
+  Add your token!
+{% endblock %}
+
+{% block content %}
+  <p>(Or go back to <a href="{% url 'shortener.index' %}">index page</a>)</p>
+  <div class="w-1/2">
+    <form action="{% url 'shortener.create' %}" method="POST" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p class="submit">
+        <input type="submit" name="create" value="Create">
+      </p>
+    </form>
+  </div>
+{% endblock %}

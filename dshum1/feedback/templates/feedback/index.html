@@ -1,0 +1,28 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+  Feedback
+{% endblock %}
+
+{% block h1 %}
+  Feedback
+{% endblock %}
+
+{% block content %}
+  <p class="mb-8">
+    <a href="{% url 'feedback.create' %}" class="btn">Send message</a>
+  </p>
+
+  <p>Recent messages:</p>
+
+  <ul class="dash">
+    {% for message in recent_messages %}
+      <li>{{ message.message }}
+        <div class="text-sm text-rose-400">sent by {{ message.name }} at {{ message.created_at }}</div>
+      </li>
+    {% empty %}
+      <li>No messages found</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

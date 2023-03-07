@@ -1,0 +1,22 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+  New message
+{% endblock %}
+
+{% block h1 %}
+  Send your feedback!
+{% endblock %}
+
+{% block content %}
+  <p>(Or go back to <a href="{% url 'feedback.index' %}">index page</a>)</p>
+  <div class="w-1/2">
+    <form action="{% url 'feedback.create' %}" method="POST" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p class="submit">
+        <input type="submit" name="create" value="Send">
+      </p>
+    </form>
+  </div>
+{% endblock %}

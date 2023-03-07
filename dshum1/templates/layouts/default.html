@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Welcome{% endblock %}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Sans Pro">
+  <link href="{% static 'fontawesome-free-6.3.0-web/css/all.css' %}" rel="stylesheet">
+  <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+<body>
+<section class="container">
+  <div class="header">
+    <a href="{% url 'index' %}" class="logo">
+      <i class="fa-solid fa-martini-glass"></i>
+      Home
+    </a>
+    <ul class="center-menu">
+      <li>
+        <a href="{% url 'shortener.index' %}">Shortener</a>
+      </li>
+      <li>
+        <a href="{% url 'feedback.index' %}">Feedback</a>
+      </li>
+    </ul>
+    <div class="right-menu">
+      {% if user.is_authenticated %}
+        <a href="{% url 'home.index' %}">{{ user.first_name }}</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'index' %}">Register</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="body">
+    <h1>{% block h1 %}{% endblock %}</h1>
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <div class="footer">
+    <ul>
+      <li><a href="https://www.python.org/" target="_blank">Python</a></li>
+      <li><a href="https://docs.python.org/3/library/venv.html" target="_blank">Virtual Environments</a></li>
+      <li><a href="https://www.learnpython.org/" target="_blank">Learn Python</a></li>
+      <li><a href="https://diveintopython3.net/" target="_blank">Dive into Python 3</a></li>
+      <li><a href="https://moscowpython.ru/" target="_blank">Moscow Python</a></li>
+    </ul>
+    <ul>
+      <li><a href="https://www.djangoproject.com/" target="_blank">Django</a></li>
+      <li><a href="https://docs.djangoproject.com/en/4.2/intro/tutorial01/" target="_blank">Writing First App</a></li>
+      <li><a href="https://docs.djangoproject.com/en/4.2/ref/templates/" target="_blank">Django Templates</a></li>
+      <li><a href="https://realpython.com/django-redirects/" target="_blank">The Ultimate Guide to Django Redirects</a></li>
+      <li><a href="https://realpython.com/django-templates-tags-filters/" target="_blank">Built-In Tags and Filters</a></li>
+    </ul>
+    <ul>
+      <li><a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a></li>
+      <li><a href="https://hypercolor.dev/" target="_blank">Gradients for Tailwind CSS</a></li>
+      <li><a href="https://fontawesome.com/icons" target="_blank">Font Awesome Icons</a></li>
+      <li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></li>
+      <li><a href="https://www.youtube.com/watch?v=B-ytMSuwbf8" target="_blank">Web Design for Beginners</a></li>
+    </ul>
+  </div>
+</section>
+</body>
+</html>

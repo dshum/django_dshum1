@@ -1,0 +1,25 @@
+{
+  "name": "assets",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "css:dev": "postcss src/style.css -o ../static/style.css --verbose --watch",
+    "css:build": "NODE_ENV=production postcss src/style.css -o ../static/style.css --verbose"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "cssnano": "^5.1.15",
+    "postcss-cli": "^10.1.0"
+  }
+}
