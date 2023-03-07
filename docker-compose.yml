@@ -2,13 +2,14 @@ version: '3.8'
 
 services:
   web:
+    env_file: .env
     container_name: django_dshum1
     build: .
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python dshum1/manage.py runserver 0.0.0.0:8000'
+    command: bash -c "while !</dev/tcp/db/${DB_INTERNAL_PORT:-5432}; do sleep 1; done; python dshum1/manage.py runserver 0.0.0.0:${WEB_INTERNAL_PORT:-8000}"
     volumes:
       - .:/app
     ports:
-      - "8003:8000"
+      - "${WEB_EXTERNAL_PORT:-8000}:${WEB_INTERNAL_PORT:-8000}"
     depends_on:
       - db
       - redis
@@ -17,7 +18,7 @@ services:
     container_name: django_dshum1_redis
     image: redis:latest
     ports:
-      - "6003:6379"
+      - "${REDIS_EXTERNAL_PORT:-6379}:${REDIS_INTERNAL_PORT:-6379}"
     restart: unless-stopped
     tty: true
 
@@ -27,13 +28,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - "8103:5432"
+      - "${DB_EXTERNAL_PORT:-5432}:${DB_INTERNAL_PORT:-5432}"
     expose:
-      - 5432
+      - ${DB_INTERNAL_PORT:-5432}
     environment:
-      - POSTGRES_USER=karl
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=django_dshum1
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_USER:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-django}
 
 volumes:
   postgres_data:
