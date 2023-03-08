@@ -9,15 +9,17 @@
 {% endblock %}
 
 {% block content %}
-  <p>Recent messages:</p>
+  {% if recent_messages %}
+    <p>Recent messages:</p>
 
-  <ul class="dash">
-    {% for message in recent_messages %}
-      <li>{{ message.message }}
-        <div class="text-sm text-rose-400">sent by {{ message.name }} at {{ message.created_at }}</div>
-      </li>
-    {% empty %}
-      <li>No messages found</li>
-    {% endfor %}
-  </ul>
+    <ul class="dash">
+      {% for message in recent_messages %}
+        <li>{{ message.message }}
+          <div class="text-sm text-rose-400">sent by {{ message.name }} at {{ message.created_at }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No messages found</p>
+  {% endif %}
 {% endblock %}
