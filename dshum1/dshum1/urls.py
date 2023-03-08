@@ -24,8 +24,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('', include('experiments.urls')),
+    path('experiments/', include('experiments.urls')),
     path('feedback/', include('feedback.urls')),
-    path('home/', include('home.urls')),
     path('short/', include('shortener.urls')),
+    path('', include('home.urls')),
 ]

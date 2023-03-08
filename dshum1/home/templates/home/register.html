@@ -1,0 +1,21 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block h1 %}
+Join today!
+{% endblock %}
+
+{% block content %}
+<div class="w-1/2">
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p class="submit">
+      <input type="submit" value="Register">
+    </p>
+  </form>
+</div>
+{% endblock %}

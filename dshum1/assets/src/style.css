@@ -147,11 +147,11 @@ form .helptext {
 }
 
 form > ul.errorlist {
-  @apply block m-0 p-0;
+  @apply block m-0 p-0 text-sm;
 }
 
 form > ul.errorlist > li {
-  @apply block m-0 p-0 text-red-500 text-base;
+  @apply block m-0 p-0 text-red-500;
 }
 
 form > ul.errorlist > li:before {

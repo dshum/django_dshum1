@@ -9,12 +9,6 @@ logger = logging.getLogger(__name__)
 
 @cache_page(60 * 5)
 @vary_on_cookie
-def index(request):
-    return render(request, 'index.html')
-
-
-@cache_page(60 * 5)
-@vary_on_cookie
 def drama(request):
     result = get_drama_problem_result()
     return render(request, 'drama.html', {'result': result})
@@ -31,7 +25,6 @@ def get_drama_problem_result():
             for E in digits
             if D != R != A != M != T != E
             and 2 * (D * 10000 + R * 1000 + A * 100 + M * 10 + A) == T * 10000 + E * 1000 + A * 100 + T * 10 + R]
-
 
 # def handler404(request, exception, template_name='404.html'):
 #     response = render(request, template_name)
