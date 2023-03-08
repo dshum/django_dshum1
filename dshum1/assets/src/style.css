@@ -12,7 +12,7 @@ section.container {
 }
 
 .header {
-  @apply  flex flex-nowrap justify-between items-center mb-8 py-4;
+  @apply flex flex-nowrap justify-between items-center mb-8 py-4;
 }
 
 .header .logo {
@@ -62,11 +62,19 @@ section.container {
 /* General */
 
 h1, h2, h3 {
-  @apply my-4 font-bold text-gray-500;
+  @apply my-4 font-medium text-gray-600;
 }
 
 h1 {
-  @apply text-3xl;
+  @apply text-3xl font-bold text-gray-500;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
 }
 
 p {
