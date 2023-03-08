@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    restart: always
     env_file: .env
     container_name: django_dshum1
     build: .
