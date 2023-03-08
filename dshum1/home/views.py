@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ProfileForm, PasswordForm
 
 
 def is_guest(user):
@@ -18,7 +18,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-@user_passes_test(is_guest, login_url='home.index', redirect_field_name=None)
+@user_passes_test(is_guest, login_url='home', redirect_field_name=None)
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -29,7 +29,7 @@ def register(request):
             )
             user.save()
             login(request, user)
-            return redirect('home.index')
+            return redirect('home')
     else:
         form = RegistrationForm()
 
@@ -42,3 +42,30 @@ def register(request):
 def home(request):
     recent_messages = request.user.messages.order_by('-created_at')[:10]
     return render(request, 'home/index.html', {'recent_messages': recent_messages})
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user)
+    return render(request, 'home/profile.html', {'form': form})
+
+
+@login_required
+def password(request):
+    if request.method == 'POST':
+        form = PasswordForm(request.POST, instance=request.user)
+        if form.is_valid():
+            request.user.set_password(
+                form.cleaned_data.get('password')
+            )
+            request.user.save()
+            return redirect('profile')
+    else:
+        form = PasswordForm(instance=request.user)
+    return render(request, 'home/password.html', {'form': form})

@@ -5,10 +5,15 @@
 {% endblock %}
 
 {% block h1 %}
-  Welcome home!
+  Hello {{ request.user.first_name }}!
 {% endblock %}
 
 {% block content %}
+  <ul>
+    <li><a href="{% url 'profile' %}">Edit profile</a></li>
+    <li><a href="{% url 'password' %}">Change password</a></li>
+  </ul>
+
   {% if recent_messages %}
     <p>Recent messages:</p>
 

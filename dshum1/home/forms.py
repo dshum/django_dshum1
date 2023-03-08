@@ -26,3 +26,40 @@ class RegistrationForm(forms.ModelForm):
         if password and confirm_password and password != confirm_password:
             raise forms.ValidationError("Passwords must match")
         return confirm_password
+
+
+class ProfileForm(forms.ModelForm):
+    username = forms.CharField(label='Login', required=True, max_length=100)
+    first_name = forms.CharField(label='First name', required=True, max_length=100)
+    last_name = forms.CharField(label='Last name', required=True, max_length=100)
+    email = forms.EmailField(label='Email', required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+
+class PasswordForm(forms.ModelForm):
+    current_password = forms.CharField(label='Current password', required=True, max_length=50,
+                                       widget=forms.PasswordInput)
+    password = forms.CharField(label='New password', required=True, max_length=50,
+                               widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label='Confirm password', required=True, max_length=50,
+                                       widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('current_password', 'password', 'confirm_password')
+
+    def clean_current_password(self):
+        current_password = self.cleaned_data.get('current_password')
+        if not self.instance.check_password(current_password):
+            raise forms.ValidationError("Wrong current password")
+        return current_password
+
+    def clean_confirm_password(self):
+        password = self.cleaned_data.get('password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError("Passwords must match")
+        return confirm_password
