@@ -1,0 +1,28 @@
+{% extends 'layouts/default.html' %}
+
+{% load cache %}
+
+{% block title %}
+  DRAMA + DRAMA = TEATR
+{% endblock %}
+
+{% block h1 %}
+  DRAMA + DRAMA = TEATR
+{% endblock %}
+
+{% block content %}
+  <p>Solve the rebus. The same letters denote the same numbers, different - different.</p>
+  <p>
+    <span class="toggle" id="toggle-answer">Answer</span>
+  </p>
+  <p class="hidden" id="answer">
+    {% for pair in result %}
+      {{ pair.drama|join:"" }} + {{ pair.drama|join:"" }} = {{ pair.teatr|join:"" }}<br>
+    {% endfor %}
+  </p>
+  <script>
+    toggle_answer = document.getElementById("toggle-answer")
+    answer = document.getElementById("answer")
+    toggle_answer.addEventListener("click", () => answer.classList.toggle("hidden"))
+  </script>
+{% endblock %}

@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
+from .models import CssColor
+
 logger = logging.getLogger(__name__)
 
 
@@ -11,7 +13,18 @@ logger = logging.getLogger(__name__)
 @vary_on_cookie
 def drama(request):
     result = get_drama_problem_result()
-    return render(request, 'drama.html', {'result': result})
+    return render(request, 'experiments/drama.html', {'result': result})
+
+
+@cache_page(60 * 5)
+@vary_on_cookie
+def colors(request):
+    grouped_colors = dict()
+    for color in CssColor.objects.order_by('id'):
+        grouped_colors.setdefault(color.color_shade, []).append(color)
+    return render(request, 'experiments/colors.html', {
+        'grouped_colors': grouped_colors.items(),
+    })
 
 
 def get_drama_problem_result():

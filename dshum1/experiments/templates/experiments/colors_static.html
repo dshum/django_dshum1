@@ -1,0 +1,299 @@
+{% extends 'layouts/default.html' %}
+
+{% load cache %}
+
+{% block title %}
+  CSS colors
+{% endblock %}
+
+{% block h1 %}
+  CSS colors
+{% endblock %}
+
+{% block content %}
+  <div class="grid grid-cols-12 gap-4 text-sm">
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f0f8ff]">aliceblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#faebd7]">antiquewhite</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00ffff]">aqua</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#7fffd4]">aquamarine</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f0ffff]">azure</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f5f5dc]">beige</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffe4c4]">bisque</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#000000]">black</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffebcd]">blanchedalmond</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#0000ff]">blue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#8a2be2]">blueviolet</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#a52a2a]">brown</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#deb887]">burlywood</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#5f9ea0]">cadetblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#7fff00]">chartreuse</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#d2691e]">chocolate</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff7f50]">coral</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#6495ed]">cornflowerblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fff8dc]">cornsilk</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#dc143c]">crimson</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00ffff]">cyan</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00008b]">darkblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#008b8b]">darkcyan</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#b8860b]">darkgoldenrod</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#a9a9a9]">darkgray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#006400]">darkgreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#bdb76b]">darkkhaki</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#8b008b]">darkmagenta</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#556b2f]">darkolivegreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff8c00]">darkorange</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#9932cc]">darkorchid</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#8b0000]">darkred</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#e9967a]">darksalmon</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#8fbc8f]">darkseagreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#483d8b]">darkslateblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#2f4f4f]">darkslategray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00ced1]">darkturquoise</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#9400d3]">darkviolet</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff1493]">deeppink</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00bfff]">deepskyblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#696969]">dimgray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#1e90ff]">dodgerblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#b22222]">firebrick</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fffaf0]">floralwhite</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#228b22]">forestgreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff00ff]">fuchsia</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#dcdcdc]">gainsboro</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f8f8ff]">ghostwhite</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffd700]">gold</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#daa520]">goldenrod</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#808080]">gray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#008000]">green</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#adff2f]">greenyellow</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f0fff0]">honeydew</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff69b4]">hotpink</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#cd5c5c]">indianred</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#4b0082]">indigo</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fffff0]">ivory</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f0e68c]">khaki</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#e6e6fa]">lavender</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fff0f5]">lavenderblush</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#7cfc00]">lawngreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fffacd]">lemonchiffon</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#add8e6]">lightblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f08080]">lightcoral</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#e0ffff]">lightcyan</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fafad2]">lightgoldenrodyellow</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#d3d3d3]">lightgray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#90ee90]">lightgreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffb6c1]">lightpink</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffa07a]">lightsalmon</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#20b2aa]">lightseagreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#87cefa]">lightskyblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#778899]">lightslategray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#b0c4de]">lightsteelblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffffe0]">lightyellow</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00ff00]">lime</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#32cd32]">limegreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#faf0e6]">linen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff00ff]">magenta</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#800000]">maroon</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#66cdaa]">mediumaquamarine</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#0000cd]">mediumblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ba55d3]">mediumorchid</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#9370db]">mediumpurple</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#3cb371]">mediumseagreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#7b68ee]">mediumslateblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00fa9a]">mediumspringgreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#48d1cc]">mediumturquoise</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#c71585]">mediumvioletred</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#191970]">midnightblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f5fffa]">mintcream</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffe4e1]">mistyrose</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffe4b5]">moccasin</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffdead]">navajowhite</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#000080]">navy</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fdf5e6]">oldlace</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#808000]">olive</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#6b8e23]">olivedrab</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffa500]">orange</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff4500]">orangered</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#da70d6]">orchid</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#eee8aa]">palegoldenrod</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#98fb98]">palegreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#afeeee]">paleturquoise</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#db7093]">palevioletred</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffefd5]">papayawhip</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffdab9]">peachpuff</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#cd853f]">peru</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffc0cb]">pink</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#dda0dd]">plum</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#b0e0e6]">powderblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#800080]">purple</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#663399]">rebeccapurple</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff0000]">red</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#bc8f8f]">rosybrown</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#4169e1]">royalblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#8b4513]">saddlebrown</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fa8072]">salmon</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f4a460]">sandybrown</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#2e8b57]">seagreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fff5ee]">seashell</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#a0522d]">sienna</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#c0c0c0]">silver</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#87ceeb]">skyblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#6a5acd]">slateblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#708090]">slategray</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#fffafa]">snow</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#00ff7f]">springgreen</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#4682b4]">steelblue</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#d2b48c]">tan</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#008080]">teal</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#d8bfd8]">thistle</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ff6347]">tomato</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#40e0d0]">turquoise</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ee82ee]">violet</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f5deb3]">wheat</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffffff]">white</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#f5f5f5]">whitesmoke</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#ffff00]">yellow</div>
+
+    <div class="w-24 h-24 rounded-xl border-2 bg-[#9acd32]">yellowgreen</div>
+
+  </div>
+{% endblock %}

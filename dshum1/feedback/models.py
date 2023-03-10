@@ -31,7 +31,7 @@ class Message(models.Model):
         related_name='messages'
     )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Message #{self.id}"
 
     def __str__(self) -> str:
