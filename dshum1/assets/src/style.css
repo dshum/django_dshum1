@@ -44,11 +44,11 @@ section.container {
   2xl:px-[6rem] xl:px-[5rem] lg:px-[4rem] sm:px-[2rem] px-[1rem]
   mt-4 py-4 min-h-[8rem] text-base text-center
   bg-gradient-to-b from-slate-700 to-gray-600 text-gray-100
-  grid grid-cols-3 gap-3 items-start place-items-center;
+  flex flex-row flex-wrap items-center place-items-center;
 }
 
 .footer ul {
-  @apply flex flex-col w-full items-start justify-items-start;
+  @apply flex flex-col w-full md:w-1/2 lg:w-1/3 items-start justify-items-start;
 }
 
 .footer ul li {
