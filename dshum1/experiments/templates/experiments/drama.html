@@ -13,16 +13,33 @@
 {% block content %}
   <p>Solve the rebus. The same letters denote the same numbers, different - different.</p>
   <p>
-    <span class="toggle" id="toggle-answer">Answer</span>
+    <span class="toggle toggle-answer">Answer</span>
   </p>
-  <p class="hidden" id="answer">
+
+  <p class="hidden answer">
     {% for pair in result %}
       {{ pair.drama|join:"" }} + {{ pair.drama|join:"" }} = {{ pair.teatr|join:"" }}<br>
     {% endfor %}
   </p>
+
+  <pre class="hidden answer">
+  return [{"drama": (D, R, A, M, A), "teatr": (T, E, A, T, R)}
+          for D in range(1, 10)
+          for R in range(0, 10)
+          for A in range(0, 10)
+          for M in range(0, 10)
+          for T in range(1, 10)
+          for E in range(0, 10)
+          if D != R != A != M != T != E
+          and 2 * (D * 10000 + R * 1000 + A * 100 + M * 10 + A) == T * 10000 + E * 1000 + A * 100 + T * 10 + R]</pre>
+
   <script>
-    toggle_answer = document.getElementById("toggle-answer")
-    answer = document.getElementById("answer")
-    toggle_answer.addEventListener("click", () => answer.classList.toggle("hidden"))
+    document.querySelectorAll(".toggle-answer").forEach(item => {
+      item.addEventListener('click', event => {
+        document.querySelectorAll(".answer").forEach(item => {
+          item.classList.toggle("hidden")
+        })
+      })
+    })
   </script>
 {% endblock %}

@@ -29,12 +29,13 @@ def colors(request):
 
 def get_drama_problem_result():
     digits = range(0, 10)
+    digits1 = range(1, 10)
     return [{"drama": (D, R, A, M, A), "teatr": (T, E, A, T, R)}
-            for D in range(1, 10)
+            for D in digits1
             for R in digits
             for A in digits
             for M in digits
-            for T in range(1, 10)
+            for T in digits1
             for E in digits
             if D != R != A != M != T != E
             and 2 * (D * 10000 + R * 1000 + A * 100 + M * 10 + A) == T * 10000 + E * 1000 + A * 100 + T * 10 + R]
