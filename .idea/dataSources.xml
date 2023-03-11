@@ -8,5 +8,14 @@
       <jdbc-url>jdbc:postgresql://localhost:8103/django_dshum1</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Django sqlite3" uuid="eca773c2-a958-4f15-bffb-98b66de82ad5">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>//wsl$/Ubuntu-22.04/home/denis/django_dshum1/dshum1/dshum1/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:\\wsl$\Ubuntu-22.04\home\denis\django_dshum1\dshum1\db.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
