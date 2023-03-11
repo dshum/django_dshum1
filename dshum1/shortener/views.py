@@ -2,6 +2,7 @@ import logging
 
 from django import forms
 from django.conf import settings
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -34,7 +35,8 @@ def create(request):
                 full_url=form.cleaned_data['full_url'],
                 short_url=form.cleaned_data['short_url'],
             )
-            return redirect('shortener.index')
+            messages.add_message(request, messages.SUCCESS, 'New token has been saved!')
+            return redirect('shortener.create')
     else:
         form = CreateTokenForm()
 

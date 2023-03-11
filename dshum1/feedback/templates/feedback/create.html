@@ -8,6 +8,10 @@
   Send your feedback!
 {% endblock %}
 
+{% block messages %}
+  {% include 'components/messages.html' with messages=messages only %}
+{% endblock %}
+
 {% block content %}
   <p>(Or go back to <a href="{% url 'feedback.index' %}">index page</a>)</p>
   <div class="w-1/2">
