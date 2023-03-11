@@ -8,6 +8,10 @@
   Log in
 {% endblock %}
 
+{% block messages %}
+  {% include 'components/messages.html' with messages=messages only %}
+{% endblock %}
+
 {% block content %}
   <div class="w-1/2">
     <form method="post">
