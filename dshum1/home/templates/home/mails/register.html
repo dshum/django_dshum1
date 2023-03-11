@@ -1,0 +1,14 @@
+{% extends 'mails/layouts/default.html' %}
+
+{% block content %}
+  <p>
+    Your account has been created!<br>
+    Values are these:
+  </p>
+  <p>
+    Login: {{ user.username }}<br>
+    Email: {{ user.email }}<br>
+    First name: {{ user.first_name }}<br>
+    Last name: {{ user.last_name }}<br>
+  </p>
+{% endblock %}

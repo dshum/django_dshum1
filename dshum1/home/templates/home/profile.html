@@ -8,7 +8,16 @@
   Profile
 {% endblock %}
 
+{% block messages %}
+  {% include 'components/messages.html' with messages=messages only %}
+{% endblock %}
+
 {% block content %}
+  <ul class="dash">
+    <li><a href="{% url 'home' %}">Back to home page</a></li>
+    <li><a href="{% url 'password' %}">Change password</a></li>
+  </ul>
+
   <div class="w-1/2">
     <form method="post" novalidate>
       {% csrf_token %}

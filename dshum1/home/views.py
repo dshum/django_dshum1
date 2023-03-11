@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
@@ -5,7 +6,9 @@ from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
+from utils.mailable import Mailer
 from .forms import RegistrationForm, ProfileForm, PasswordForm
+from .mails import EditProfileMail, ChangePasswordMail, RegisterMail
 
 
 def is_guest(user):
@@ -29,6 +32,8 @@ def register(request):
             )
             user.save()
             login(request, user)
+            Mailer(RegisterMail(request.user)).send()
+            messages.add_message(request, messages.SUCCESS, 'Your account has been registered!')
             return redirect('home')
     else:
         form = RegistrationForm()
@@ -50,6 +55,8 @@ def profile(request):
         form = ProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            Mailer(EditProfileMail(request.user)).send()
+            messages.add_message(request, messages.SUCCESS, 'Profile has been updated')
             return redirect('profile')
     else:
         form = ProfileForm(instance=request.user)
@@ -61,11 +68,12 @@ def password(request):
     if request.method == 'POST':
         form = PasswordForm(request.POST, instance=request.user)
         if form.is_valid():
-            request.user.set_password(
-                form.cleaned_data.get('password')
-            )
+            new_password = form.cleaned_data.get('password')
+            request.user.set_password(new_password)
             request.user.save()
-            return redirect('profile')
+            Mailer(ChangePasswordMail(request.user, new_password=new_password)).send()
+            messages.add_message(request, messages.SUCCESS, 'Password has been changed. Please log in again')
+            return redirect('home')
     else:
         form = PasswordForm(instance=request.user)
     return render(request, 'home/password.html', {'form': form})
