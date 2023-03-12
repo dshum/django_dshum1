@@ -1,19 +1,22 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from utils.mailable import Mailer
 from .forms import CreateMessageForm
-from .mails import MessageMail
 from .models import Message
+from .signals import message_received
 
 
 @cache_page(60 * 5)
 @vary_on_cookie
 def index(request):
-    recent_messages = Message.messages.recent()
-    return render(request, 'feedback/index.html', {'recent_messages': recent_messages})
+    messages = Message.messages.recent()
+    paginator = Paginator(messages, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'feedback/index.html', {'messages_page_obj': page_obj})
 
 
 def create(request):
@@ -27,7 +30,7 @@ def create(request):
                 is_human=form.cleaned_data['is_human'],
                 user=request.user,
             )
-            Mailer(MessageMail(message)).send()
+            message_received.send(sender='feedback_create_message', message=message)
             messages.add_message(request, messages.SUCCESS, 'Your message has been sent!')
             return redirect('feedback.create')
     elif request.user.is_authenticated:

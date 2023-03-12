@@ -6,9 +6,8 @@ from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from utils.mailable import Mailer
 from .forms import RegistrationForm, ProfileForm, PasswordForm
-from .mails import EditProfileMail, ChangePasswordMail, RegisterMail
+from .signals import user_registered, profile_changed, password_changed
 
 
 def is_guest(user):
@@ -32,7 +31,7 @@ def register(request):
             )
             user.save()
             login(request, user)
-            Mailer(RegisterMail(request.user)).send()
+            user_registered.send(sender='home_register_user', user=user)
             messages.add_message(request, messages.SUCCESS, 'Your account has been registered!')
             return redirect('home')
     else:
@@ -55,7 +54,7 @@ def profile(request):
         form = ProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            Mailer(EditProfileMail(request.user)).send()
+            profile_changed.send(sender='home_edit_profile', user=request.user)
             messages.add_message(request, messages.SUCCESS, 'Profile has been updated')
             return redirect('profile')
     else:
@@ -71,7 +70,7 @@ def password(request):
             new_password = form.cleaned_data.get('password')
             request.user.set_password(new_password)
             request.user.save()
-            Mailer(ChangePasswordMail(request.user, new_password=new_password)).send()
+            password_changed.send(sender='home_change_password', user=request.user, new_password=new_password)
             messages.add_message(request, messages.SUCCESS, 'Password has been changed. Please log in again')
             return redirect('home')
     else:

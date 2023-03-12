@@ -16,7 +16,7 @@
   <h3>Recent messages</h3>
 
   <ul class="dash">
-    {% for message in recent_messages %}
+    {% for message in messages_page_obj %}
       <li>{{ message.message }}
         <div class="text-sm text-rose-400">sent by {{ message.name }} at {{ message.created_at }}</div>
       </li>
@@ -25,4 +25,5 @@
     {% endfor %}
   </ul>
 
+  {% include 'components/pagination.html' with page_obj=messages_page_obj %}
 {% endblock %}
