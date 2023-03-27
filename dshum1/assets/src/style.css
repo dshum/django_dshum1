@@ -154,19 +154,19 @@ form input[type="submit"] {
   @apply block rounded-lg py-2 px-4 min-w-[8rem] bg-blue-400 text-white cursor-pointer;
 }
 
-form .helptext {
+.helptext {
   @apply block text-sm text-gray-400;
 }
 
-form > ul.errorlist {
+ul.errorlist {
   @apply block m-0 p-0 text-sm;
 }
 
-form > ul.errorlist > li {
+ul.errorlist > li {
   @apply block m-0 p-0 text-red-500;
 }
 
-form > ul.errorlist > li:before {
+ul.errorlist > li:before {
   @apply inline-block w-[1.2em] ml-[-1.2em] p-0 text-red-500;
   content: "—";
 }

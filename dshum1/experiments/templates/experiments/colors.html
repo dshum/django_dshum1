@@ -24,7 +24,7 @@
     <div class="flex flex-row flex-wrap text-sm items-center place-items-center">
       {% for color in colors %}
         <div class="mr-4 mb-4 p-2 border border-slate-100 rounded-lg shadow-xl text-center">
-          <div class="rounded-lg shadow-sm w-24 h-24 bg-[{{ color.hex_value|lower }}] cursor-pointer"
+          <div class="rounded shadow-sm w-24 h-24 bg-[{{ color.hex_value|lower }}] cursor-pointer"
                title="Click to copy" onclick="copy_to_clipboard('{{ color.keyword }}')"></div>
           <div class="flex flex-col" title="{{ color.keyword }}">
             <span class="w-24 overflow-hidden text-ellipsis">{{ color.keyword }}</span>

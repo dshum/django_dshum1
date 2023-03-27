@@ -25,6 +25,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    path("password_reset/",
+         auth_views.PasswordResetView.as_view(html_email_template_name='registration/password_reset_email.html'),
+         name="password_reset"),
     path('', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
     path('experiments/', include('experiments.urls')),
