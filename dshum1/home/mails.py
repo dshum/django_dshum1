@@ -9,8 +9,8 @@ class RegisterMail(Mailable):
         super().__init__(
             subject="Your account has been created!",
             to=(name, user.email),
-            template="home/mails/register.html",
-            scope={"user": user}
+            template='home/mails/register.html',
+            scope={'user': user, 'logo': 'cat'}
         )
 
 
@@ -20,8 +20,8 @@ class EditProfileMail(Mailable):
         super().__init__(
             subject="Your profile has been updated",
             to=(name, user.email),
-            template="home/mails/edit_profile.html",
-            scope={"user": user}
+            template='home/mails/edit_profile.html',
+            scope={'user': user, 'logo': 'cat'}
         )
 
 
@@ -31,6 +31,6 @@ class ChangePasswordMail(Mailable):
         super().__init__(
             subject="Your password has been changed",
             to=(name, user.email),
-            template="home/mails/change_password.html",
-            scope={"user": user, "new_password": new_password}
+            template='home/mails/change_password.html',
+            scope={'user': user, 'new_password': new_password, 'logo': 'cat'}
         )

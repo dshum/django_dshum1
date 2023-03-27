@@ -1,4 +1,6 @@
-<p><img src="cid:logo" width="300" height="200" alt="Maine Coon"></p>
+{% if logo %}
+  <p><img src="cid:{{ logo }}" width="300" height="200" alt="Maine Coon"></p>
+{% endif %}
 
 <p>Hello!</p>
 

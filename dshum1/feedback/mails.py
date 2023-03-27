@@ -10,5 +10,5 @@ class MessageMail(Mailable):
             subject="New message",
             to=('Denis', 'denis-shumeev@yandex.ru'),
             template="feedback/mails/message.html",
-            scope={"message": message}
+            scope={"message": message, 'logo': 'cat'}
         )

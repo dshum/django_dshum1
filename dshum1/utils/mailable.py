@@ -3,6 +3,7 @@ from email.mime.image import MIMEImage
 from functools import lru_cache
 from typing import Any, Optional, NamedTuple
 
+from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -13,6 +14,19 @@ def convert_address(address: tuple | list[tuple] = None):
         return None
     addresses = address if isinstance(address, list) else [address]
     return [f"{name} <{email}>" if name else email for (name, email) in addresses]
+
+
+def get_common_scope():
+    return {'site_name': settings.BASE_URL}
+
+
+@lru_cache()
+def attach_data(path: str, content_id: str):
+    with open(finders.find(path), 'rb') as f:
+        file_data = f.read()
+    file = MIMEImage(file_data)
+    file.add_header('Content-ID', content_id)
+    return file
 
 
 class Mailable:
@@ -26,6 +40,8 @@ class Mailable:
                  from_email: tuple = None,
                  reply_to: str = None,
                  headers: dict[str: str] = None):
+        scope.update(get_common_scope())
+
         self.subject = subject
         self.from_email = convert_address(from_email)
         self.to = convert_address(to)
@@ -58,12 +74,3 @@ class Mailer:
 
     def send(self):
         return self.message.send()
-
-
-@lru_cache()
-def attach_data(path: str, content_id: str):
-    with open(finders.find(path), 'rb') as f:
-        file_data = f.read()
-    file = MIMEImage(file_data)
-    file.add_header('Content-ID', content_id)
-    return file
