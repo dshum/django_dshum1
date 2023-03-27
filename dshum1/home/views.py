@@ -40,8 +40,6 @@ def register(request):
     return render(request, 'home/register.html', {'form': form})
 
 
-# @cache_page(60 * 5)
-# @vary_on_cookie
 @login_required
 def home(request):
     recent_messages = request.user.messages.order_by('-created_at')[:10]

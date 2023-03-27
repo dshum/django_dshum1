@@ -13,7 +13,7 @@ import logging
 import os
 
 from django.conf import settings
-from django.utils.baseconv import BASE62_ALPHABET
+from django.utils.crypto import RANDOM_STRING_CHARS
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -29,12 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-DEBUG_SQL = os.getenv('DEBUG_SQL', 'False').lower() == 'true'
+DEBUG = True
+DEBUG_SQL = True if os.getenv('DEBUG_SQL', 'False').lower() == 'true' else False
 
 BASE_URL = os.getenv('BASE_URL', 'http://localhost')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -135,6 +135,11 @@ LOGGING = {
         }
     },
     'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -155,10 +160,10 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['file_sql'],
         },
-        'dshum1': {
-            'handlers': ['file'],
+        'dshum1.feedback': {
+            'handlers': ['file', 'mail_admins'],
             'level': 'DEBUG',
-            'propagate': False,
+            'propagate': True,
         },
     },
 }
@@ -206,6 +211,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ADMINS = [('Denis', 'denis-shumeev@yandex.ru')]
+MANAGERS = [('Denis', 'denis-shumeev@yandex.ru')]
+
 # Email settings
 # https://docs.djangoproject.com/en/4.1/ref/settings/#email-backend
 
@@ -216,6 +224,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = 'denis-shumeev@yandex.ru'
 
 # Login
 
@@ -225,5 +234,5 @@ LOGOUT_REDIRECT_URL = 'index'
 
 # Shortener
 
-CHARACTERS = BASE62_ALPHABET
+CHARACTERS = RANDOM_STRING_CHARS
 TOKEN_LENGTH = 6

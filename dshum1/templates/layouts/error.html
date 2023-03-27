@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Welcome{% endblock %}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source Sans Pro">
+  <link href="{% static 'fontawesome-free-6.3.0-web/css/all.css' %}" rel="stylesheet">
+  <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+<body>
+<section class="container">
+  <div class="header">
+    <a href="{% url 'index' %}" class="logo">
+      <i class="fa-solid fa-martini-glass"></i>
+      Home
+    </a>
+  </div>
+
+  <div class="body">
+    <h1>{% block h1 %}{% endblock %}</h1>
+
+    {% block content %}{% endblock %}
+  </div>
+</section>
+</body>
+</html>

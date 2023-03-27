@@ -16,8 +16,6 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-@cache_page(60 * 5)
-@vary_on_cookie
 def index(request):
     query = request.GET.get('query', "")
     tokens = Token.tokens.search(query=query).ordered()
@@ -44,6 +42,7 @@ def create(request):
 
 
 @cache_page(60 * 5)
+@vary_on_cookie
 def redirect_url(request, short_url):
     token = Token.tokens.short_url(short_url=short_url).first()
     if token:
