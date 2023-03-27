@@ -1,37 +1,29 @@
-import random
-import string
-from pathlib import Path
-from typing import Any, TypedDict, Optional, NamedTuple
+from email.mime.image import MIMEImage
+from email.mime.image import MIMEImage
+from functools import lru_cache
+from typing import Any, Optional, NamedTuple
 
+from django.contrib.staticfiles import finders
 from django.core.mail import EmailMessage
-from django.shortcuts import render
 from django.template.loader import render_to_string
 
 
-class Address(NamedTuple):
-    email: str
-    name: Optional[str] = None
-
-    def to_string(self):
-        return f"{self.name} <{self.email}>" if self.name else self.email
-
-
-def convert_address(address: Address | list[Address] = None):
+def convert_address(address: tuple | list[tuple] = None):
     if address is None:
         return None
     addresses = address if isinstance(address, list) else [address]
-    return [to.to_string() for to in addresses]
+    return [f"{name} <{email}>" if name else email for (name, email) in addresses]
 
 
 class Mailable:
     def __init__(self,
                  subject: str,
-                 to: Address | list[Address],
+                 to: tuple | list[tuple],
                  template: str,
                  scope: dict[str: Any],
-                 bcc: Address | list[Address] = None,
-                 cc: Address | list[Address] = None,
-                 from_email: Address = None,
+                 bcc: tuple | list[tuple] = None,
+                 cc: tuple | list[tuple] = None,
+                 from_email: tuple = None,
                  reply_to: str = None,
                  headers: dict[str: str] = None):
         self.subject = subject
@@ -56,16 +48,22 @@ class Mailer:
         self.message = EmailMessage(**params)
         self.message.content_subtype = "html"
 
-    def attach(self, filename, path, mimetype=None):
-        path = Path(path)
-        with path.open('rb') as file:
-            content = file.read()
-            self.message.attach(filename, content, mimetype)
+    def attach(self, path: str, content_id: str):
+        self.message.attach(attach_data(path, content_id))
         return self
 
-    def attach_file(self, path, mimetype=None):
-        self.message.attach_file(path, mimetype)
+    def attach_file(self, path: str, mimetype=None):
+        self.message.attach_file(finders.find(path), mimetype)
         return self
 
     def send(self):
         return self.message.send()
+
+
+@lru_cache()
+def attach_data(path: str, content_id: str):
+    with open(finders.find(path), 'rb') as f:
+        file_data = f.read()
+    file = MIMEImage(file_data)
+    file.add_header('Content-ID', content_id)
+    return file

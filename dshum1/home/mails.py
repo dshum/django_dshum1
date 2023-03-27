@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from utils.mailable import Mailable, Address
+from utils.mailable import Mailable
 
 
 class RegisterMail(Mailable):
@@ -8,7 +8,7 @@ class RegisterMail(Mailable):
         name = f"{user.first_name} {user.last_name}"
         super().__init__(
             subject="Your account has been created!",
-            to=Address(email=user.email, name=name),
+            to=(name, user.email),
             template="home/mails/register.html",
             scope={"user": user}
         )
@@ -19,7 +19,7 @@ class EditProfileMail(Mailable):
         name = f"{user.first_name} {user.last_name}"
         super().__init__(
             subject="Your profile has been updated",
-            to=Address(email=user.email, name=name),
+            to=(name, user.email),
             template="home/mails/edit_profile.html",
             scope={"user": user}
         )
@@ -30,7 +30,7 @@ class ChangePasswordMail(Mailable):
         name = f"{user.first_name} {user.last_name}"
         super().__init__(
             subject="Your password has been changed",
-            to=Address(email=user.email, name=name),
+            to=(name, user.email),
             template="home/mails/change_password.html",
             scope={"user": user, "new_password": new_password}
         )
