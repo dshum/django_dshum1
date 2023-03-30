@@ -1,0 +1,28 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+  New link
+{% endblock %}
+
+{% block h1 %}
+  Add some useful stuff!
+{% endblock %}
+
+{% block messages %}
+  {% include 'components/messages.html' with messages=messages only %}
+{% endblock %}
+
+{% block content %}
+  <p>(Or go back to <a href="{% url 'links.index' %}">index page</a>)</p>
+  <div class="w-1/2">
+    <form action="{% url 'links.create' %}" method="POST" novalidate>
+      {% csrf_token %}
+      <ul>
+        {{ form.as_ul }}
+        <li class="submit">
+          <input type="submit" name="create" value="Add">
+        </li>
+      </ul>
+    </form>
+  </div>
+{% endblock %}

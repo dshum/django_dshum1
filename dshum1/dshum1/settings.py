@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'experiments.apps.ExperimentsConfig',
     'feedback.apps.FeedbackConfig',
+    'links.apps.LinksConfig',
     'home.apps.HomeConfig',
     'shortener.apps.ShortenerConfig',
 ]
@@ -160,7 +161,7 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['file_sql'],
         },
-        'dshum1.feedback': {
+        'dshum1': {
             'handlers': ['file', 'mail_admins'],
             'level': 'DEBUG',
             'propagate': True,

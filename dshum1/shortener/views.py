@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    query = request.GET.get('query', "")
+    query = request.GET.get('query')
     tokens = Token.tokens.search(query=query).ordered()
     paginator = Paginator(tokens, 10)
     page_number = request.GET.get('page')

@@ -31,6 +31,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
     path('experiments/', include('experiments.urls')),
+    path('links/', include('links.urls')),
     path('feedback/', include('feedback.urls')),
     path('short/', include('shortener.urls')),
 ]

@@ -105,7 +105,7 @@ ul.dash > li:before {
 }
 
 a.btn {
-  @apply inline-block rounded-lg py-2 px-4 min-w-[8rem] bg-blue-400 text-white cursor-pointer select-none;
+  @apply inline-block rounded-lg py-2 px-4 min-w-[8rem] bg-blue-400 text-center text-white cursor-pointer select-none;
 }
 
 pre {
@@ -115,6 +115,10 @@ pre {
 /* Forms */
 
 form > p {
+  @apply w-full mt-0 mb-4;
+}
+
+form > ul > li {
   @apply w-full mt-0 mb-4;
 }
 
@@ -169,6 +173,14 @@ ul.errorlist > li {
 ul.errorlist > li:before {
   @apply inline-block w-[1.2em] ml-[-1.2em] p-0 text-red-500;
   content: "—";
+}
+
+form > p span {
+  @apply block;
+}
+
+form > ul > li span {
+  @apply block;
 }
 
 /* Alerts */

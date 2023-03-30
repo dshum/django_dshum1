@@ -1,0 +1,54 @@
+{% extends 'layouts/default.html' %}
+
+{% block title %}
+  Links
+{% endblock %}
+
+{% block h1 %}
+  Useful links
+{% endblock %}
+
+{% block messages %}
+  {% include 'components/messages.html' with messages=messages only %}
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <p class="mb-8">
+      <a href="{% url 'links.create' %}" class="btn">Add link</a>
+    </p>
+  {% endif %}
+
+  <h3>Recent links</h3>
+
+  <form class="w-1/2" action="{% url 'links.index' %}" method="GET" novalidate>
+    <div class="flex flex-row space-x-4 items-center">
+      <div><label><input type="text" name="query" value="{{ query }}" placeholder="Type title or URL..."></label></div>
+      <div><input type="submit" value="Search"></div>
+    </div>
+  </form>
+
+  <ul class="dash">
+    {% for link in links %}
+      <li>{{ link.title }}
+        {% if link.tags %}
+          {% for tag in link.tags.all %}
+            <a class="ml-2 text-sm text-slate-400" href="">{{ tag.title }}</a>
+          {% endfor %}
+        {% endif %}
+        <div><a href="{{ link.url }}" target="_blank">{{ link.url }}</a></div>
+        <div class="text-sm text-rose-400">
+          {% if link.user %}
+            added by {{ link.user.first_name }} at {{ link.created_at }}
+          {% else %}
+            added at {{ link.created_at }}
+          {% endif %}
+        </div>
+      </li>
+    {% empty %}
+      <li>No links found</li>
+    {% endfor %}
+  </ul>
+
+  {% include 'components/pagination.html' with page_obj=links %}
+{% endblock %}
