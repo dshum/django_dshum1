@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import logging
 import os
+import sentry_sdk
 
 from django.conf import settings
 from django.utils.crypto import RANDOM_STRING_CHARS
 from dotenv import load_dotenv
 from pathlib import Path
+from sentry_sdk.integrations.django import DjangoIntegration
 
 load_dotenv()
 
@@ -237,3 +239,21 @@ LOGOUT_REDIRECT_URL = 'index'
 
 CHARACTERS = RANDOM_STRING_CHARS
 TOKEN_LENGTH = 6
+
+# Sentry settings
+
+sentry_sdk.init(
+    dsn="https://88180fb008d948e0a97545bcf9482356@o4504944059940864.ingest.sentry.io/4504944065839104",
+    integrations=[
+        DjangoIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
