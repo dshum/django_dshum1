@@ -243,7 +243,7 @@ TOKEN_LENGTH = 6
 # Sentry settings
 
 sentry_sdk.init(
-    dsn="https://88180fb008d948e0a97545bcf9482356@o4504944059940864.ingest.sentry.io/4504944065839104",
+    dsn=os.getenv('SENTRY_DNS'),
     integrations=[
         DjangoIntegration(),
     ],
