@@ -9,17 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import logging
+import logging.config
 import os
 import sentry_sdk
 
-from django.conf import settings
 from django.utils.crypto import RANDOM_STRING_CHARS
-from dotenv import load_dotenv
 from pathlib import Path
 from sentry_sdk.integrations.django import DjangoIntegration
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-DEBUG_SQL = True if os.getenv('DEBUG_SQL', 'False').lower() == 'true' else False
+DEBUG = os.getenv('DEBUG', 'False')
 
 BASE_URL = os.getenv('BASE_URL', 'http://localhost')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -120,56 +115,35 @@ CACHES = {
     }
 }
 
-LOGGING = {
+# Logging configuration
+
+# Clear previous config
+LOGGING_CONFIG = None
+
+# Get log level from env
+LOGLEVEL = os.getenv('DJANGO_LOGLEVEL', 'info').upper()
+
+logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'default': {
-            'format': '{levelname} {asctime} {module} {message}\n',
-            'style': '{',
-        }
-    },
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
+        'console': {
+            'format': '%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(module)s %(process)d %(thread)d %(message)s',
         },
-        'require_debug_sql_true': {
-            '()': 'utils.log.filters.RequireDebugSqlTrue',
-        }
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
         },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'storage/logs/debug.log',
-            'filters': ['require_debug_true'],
-            'formatter': 'default',
-        },
-        'file_sql': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'storage/logs/sql.log',
-            'filters': ['require_debug_sql_true'],
-            'formatter': 'default',
-        }
     },
     'loggers': {
-        'django.db.backends': {
-            'level': 'DEBUG',
-            'handlers': ['file_sql'],
-        },
-        'dshum1': {
-            'handlers': ['file', 'mail_admins'],
-            'level': 'DEBUG',
-            'propagate': True,
+        '': {
+            'level': LOGLEVEL,
+            'handlers': ['console', ],
         },
     },
-}
+})
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
